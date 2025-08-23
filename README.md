@@ -10,4 +10,3 @@ exercise2:
 - Reset the screeen.
 
 2) 
-https://www.figma.com/design/wujbYRdmtf6jUajEioRFUT/Calculator?node-id=1-2&t=mLXJJNJMKlonWw1k-0
