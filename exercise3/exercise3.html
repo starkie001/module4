@@ -1,55 +1,114 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body {
-font-family: Arial, Helvetica, sans-serif;
-background-color: #e3f2fd;
-}
-.card {
-padding: 10px;
-}
-.card-title {
-font-weight: 600;
-font-size: 3em;
-padding: 0 0 10px 0;
-}
-.card-description {
-font-weight: 400;
-font-size: 2em
-}
-</style>
-</head>
-<body>
-<template id="card-template">
-<div class="card">
-<div class="card-body">
-<div class="card-title"></div>
-<div class="card-text"></div>
-</div>
-</div>
-</template>
-<div id="card-list"></div>
+  <head>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #e3f2fd;
+      }
 
-<script>
-function addCard(title, text) {
-// clone the template
-const template =
-document.getElementById("card-template")
-.content.cloneNode(true);
-// populate the template
-template.querySelector('.card-title').innerText = title;
-template.querySelector('.card-text').innerText = text;
-// include the populated template into the page
-document.querySelector('#card-list').appendChild(template);
-}
+      .card {
+        padding: 20px;
+        margin: 20px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        background-color: white;
+      }
 
-const data = [{name: 'bob', age: 23}, {name: 'alice', age: 39}];
+      .card-title {
+        font-weight: 600;
+        font-size: 2.5em;
+        padding-bottom: 20px;
+      }
 
-data.forEach(item => {
-addCard(item.name, `Age: ${item.age}`);
-});
+      .portfolio-card {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #aaa;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+      }
 
-</script>
-</body>
+      .portfolio-title {
+        font-weight: 500;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      .portfolio-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Template for an artist card with embedded portfolio -->
+    <template id="card-template">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title"></div>
+          <div class="portfolio-list"></div>
+        </div>
+      </div>
+    </template>
+
+    <div id="card-list"></div>
+
+    <script>
+      function addCard(artistName, portfolioArray) {
+        const template = document
+          .getElementById("card-template")
+          .content.cloneNode(true);
+
+        // Set artist name
+        template.querySelector(".card-title").innerText = artistName;
+
+        const portfolioList = template.querySelector(".portfolio-list");
+
+        // Create portfolio cards inside artist card
+        portfolioArray.forEach((item) => {
+          const portfolioCard = document.createElement("div");
+          portfolioCard.className = "portfolio-card";
+
+          const title = document.createElement("div");
+          title.className = "portfolio-title";
+          title.innerText = item.title;
+
+          const imageContainer = document.createElement("div");
+          imageContainer.className = "portfolio-image";
+          imageContainer.innerHTML = `<img src="${item.url}" alt="${item.title}">`;
+
+          portfolioCard.appendChild(title);
+          portfolioCard.appendChild(imageContainer);
+          portfolioList.appendChild(portfolioCard);
+        });
+
+        document.querySelector("#card-list").appendChild(template);
+      }
+
+      // Example artist data
+      const artist = [
+        {
+          name: "Van Gogh",
+          portfolio: [
+            {
+              title: "Portrait",
+              url: "https://collectionapi.metmuseum.org/api/collection/v1/iiif/436532/1671316/main-image",
+            },
+            {
+              title: "Sky",
+              url: "https://mymodernmet.com/wp/wp-content/uploads/2020/11/White-house-night-van-goh-worldwide-2.jpg",
+            },
+          ],
+        },
+      ];
+
+      // Loop through artist data and generate cards
+      artist.forEach((item) => {
+        addCard(item.name, item.portfolio);
+      });
+    </script>
+  </body>
 </html>
+
