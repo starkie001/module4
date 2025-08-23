@@ -11,3 +11,5 @@ exercise2:
 
 2) 
 https://i.cbc.ca/1.6622684.1702067412!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_1180/nasa-space-telescope.jpg?im=Resize%3D780
+
+https://www.holoweb.net/liam/pictures/2007-05-11-banff/pages/img_2319/img_2319-300x200.jpg
